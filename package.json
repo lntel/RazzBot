@@ -1,0 +1,25 @@
+{
+  "name": "razzbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/app.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lntel/RazzBot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lntel/RazzBot/issues"
+  },
+  "homepage": "https://github.com/lntel/RazzBot#readme",
+  "dependencies": {
+    "quickcord": "^10.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}

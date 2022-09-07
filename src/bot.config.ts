@@ -10,7 +10,7 @@ export interface BotConfiguration {
 
 const botConfig: BotConfiguration = {
     token: process.env.BOT_TOKEN || "",
-    newsChannelId: process.env.NEWS_CHANNEL_ID || "770952517382963221",
+    newsChannelId: process.env.NEWS_CHANNEL_ID || "1017107929897390151",
     guildId: process.env.GUILD_ID || "746120267905892431"
 }
 

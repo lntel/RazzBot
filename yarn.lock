@@ -99,10 +99,10 @@
   resolved "https://registry.npmjs.org/@tsconfig/node16/-/node16-1.0.3.tgz"
   integrity sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==
 
-"@types/node-cron@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.npmjs.org/@types/node-cron/-/node-cron-3.0.2.tgz"
-  integrity sha512-SK/4GYWiWvGLPl/yv+Tm5oLYbzMx1V3y7CsNTvOb3vF8O9oXH11U6/zckISHnBl4YH8MvXHFIUXbYoBONSdmzw==
+"@types/node-cron@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@types/node-cron/-/node-cron-3.0.4.tgz#ade755125a5b9e409ba9598e04c7132a05c108db"
+  integrity sha512-A2H+uz5ry4hohYjRe5mQSE/8Dx/HGw4WZ728JxhKUZ7z8CMvRuG2tpbzGHRGQCuQzz5aCNB1iXzPZYHd4BPHvw==
 
 "@types/node@*":
   version "18.7.8"

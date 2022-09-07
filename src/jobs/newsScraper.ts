@@ -49,7 +49,7 @@ const newsScraper = async () => {
 
      const randomArticle = news[0];
 
-     const embed: APIEmbed = {
+     const embed = {
         title: randomArticle?.title,
         description: randomArticle?.description,
         url: randomArticle?.link

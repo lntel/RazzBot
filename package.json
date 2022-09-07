@@ -23,6 +23,7 @@
   "homepage": "https://github.com/lntel/RazzBot#readme",
   "dependencies": {
     "discord.js": "^14.2.0",
+    "dotenv": "^16.0.2",
     "html-dom-parser": "^3.1.1",
     "node-cron": "^3.0.2",
     "node-fetch": "^3.2.10",
@@ -32,7 +33,6 @@
   },
   "devDependencies": {
     "@types/node-cron": "^3.0.4",
-    "dotenv": "^16.0.1",
     "nodemon": "^2.0.19",
     "ts-node": "^10.9.1"
   }

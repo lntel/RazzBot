@@ -3,7 +3,7 @@ import { schedule } from 'node-cron'
 import newsScraper from './jobs/newsScraper';
 import botConfig from './bot.config';
 
-export const bot = new Client('ODIxNDY1NTg5Mjg1MjU3Mjc2.YFEHcg.wMlLBeeeabh4NpFAB4cPbiIDzFA', '!', {
+export const bot = new Client('MTAxNzEyMzEyODgzODcxNzQ1MA.GHuj6Y.NnB6dwOsshoNP5YiRrjzkbeLMOykrm7oVJ5AqU', '!', {
     intents: ['Guilds', 'GuildMessages', 'GuildPresences']
 });
 

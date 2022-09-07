@@ -18,7 +18,7 @@ bot.on('ready', client => {
     newsScraper();
 
     // Start all jobs
-    // schedule('* * * * *', newsScraper);
+    schedule('0 */6 * * *', newsScraper);
 
     console.log(`${user.username}#${user.discriminator} ready to rock and roll`);
 });

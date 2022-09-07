@@ -1,16 +1,21 @@
 import { launch } from 'puppeteer'
 import { bot } from '../app';
-import { TextChannel, APIEmbed } from 'discord.js'
+import { TextChannel, APIEmbed, EmbedBuilder } from 'discord.js'
 import botConfig from '../bot.config';
+import loudwire from '../scrapers/loudwire';
+import rocknewsuk from '../scrapers/rocknewsuk';
 
 export interface NewsSource {
     url: string;
-    regex: RegExp;
+    logoUrl: string;
+    cb: (elements: HTMLElement[]) => void;
 }
 
 export interface NewsArticle {
     title: string;
     description: string;
+    url: string;
+    time?: string;
     image?: string;
 }
 
@@ -20,46 +25,47 @@ const newsScraper = async () => {
     const sources: NewsSource[] = [
         {
             url: 'https://loudwire.com/category/news/',
-            regex: /<article>.+<div class="content">(.+)<\/div><\/article>/gm
-        }
+            logoUrl: 'https://townsquare.media/site/366/files/2019/03/ldlogo2.png',
+            cb: loudwire
+        },
+        {
+            url: 'https://www.rocknews.co.uk/',
+            logoUrl: 'https://www.rocknews.co.uk/wp-content/uploads/2021/12/Billboard-Ad-9-7.png',
+            cb: rocknewsuk
+        },
     ];
 
     const browser = await launch();
     const page = await browser.newPage();
 
-    await page.goto(sources[0].url);
+    const source = sources[Math.floor(Math.random() * sources.length)];
 
-    const news = await page.$$eval('article', articles => {
-        return articles.map(article => {
+    await page.goto(source.url, {
+        waitUntil: 'networkidle0'
+    });
 
-            const title = article.querySelector('.title')?.innerHTML;
-            const description = article.querySelector('.excerpt')?.innerHTML;
-            const link = article.querySelector('.title')?.getAttribute('href');
+    const articles = ((await page.$$eval('article', source.cb)) as unknown as NewsArticle[]).filter(article => article);
 
-            if(!title || !description || description === 'Rock news.') return;
+    const randomArticle = articles[Math.floor(Math.random() * articles.length)];
 
-            return {
-                image: article.style,
-                title,
-                description,
-                link: `http:${link}`
-            }
+    console.log(randomArticle)
+
+    const embed = new EmbedBuilder()
+        .setTitle(randomArticle.title || null)
+        .setDescription(randomArticle.description || null)
+        .setThumbnail(source.logoUrl || null)
+        .setImage(randomArticle.image || null)
+        .setURL(randomArticle.url || null)
+        .setColor('#1A1A1A')
+        .setFooter({
+            text: randomArticle.time ? randomArticle.time : new Date().toDateString()
         })
-     })
 
-     const randomArticle = news[0];
+    const channel = await bot.channels.fetch(botConfig.newsChannelId);
 
-     const embed = {
-        title: randomArticle?.title,
-        description: randomArticle?.description,
-        url: randomArticle?.link
-     }
-
-     const channel = await bot.channels.fetch(botConfig.newsChannelId);
-
-     (channel as TextChannel).send({
+    (channel as TextChannel).send({
         embeds: [embed]
-     })
+    })
 
     await browser.close();
 

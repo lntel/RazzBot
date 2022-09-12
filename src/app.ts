@@ -11,11 +11,16 @@ bot.command('test', (res, args) => {
     newsScraper();
 });
 
-bot.on('ready', client => {
+bot.on('ready', async client => {
 
     const { user } = client;
 
-    newsScraper();
+    const guild = client.guilds.cache.first();
+
+    const invite = await guild?.invites.create(guild.channels.cache.first()!.id)
+
+    console.log(invite?.url)
+    // newsScraper();
 
     // Start all jobs
     schedule('0 */6 * * *', newsScraper);

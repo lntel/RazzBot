@@ -16,12 +16,7 @@ bot.on('ready', async client => {
 
     const { user } = client;
 
-    const guild = client.guilds.cache.first();
-
-    const invite = await guild?.invites.create((guild.channels.cache.first() as TextChannel))
-
-    console.log(invite?.url)
-    // newsScraper();
+    newsScraper();
 
     // Start all jobs
     schedule('0 */6 * * *', newsScraper);

@@ -2,6 +2,7 @@ import { Client } from 'quickcord'
 import { schedule } from 'node-cron'
 import newsScraper from './jobs/newsScraper';
 import botConfig from './bot.config';
+import { ChannelType, TextChannel } from 'discord.js';
 
 export const bot = new Client('MTAxNzEyMzEyODgzODcxNzQ1MA.GHuj6Y.NnB6dwOsshoNP5YiRrjzkbeLMOykrm7oVJ5AqU', '!', {
     intents: ['Guilds', 'GuildMessages', 'GuildPresences']
@@ -17,7 +18,7 @@ bot.on('ready', async client => {
 
     const guild = client.guilds.cache.first();
 
-    const invite = await guild?.invites.create(guild.channels.cache.first()!.id)
+    const invite = await guild?.invites.create((guild.channels.cache.first() as TextChannel))
 
     console.log(invite?.url)
     // newsScraper();
